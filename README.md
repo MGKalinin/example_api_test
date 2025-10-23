@@ -9,8 +9,8 @@
 
 Нас интересуют эндпоинты:
 
-GET /users — список пользователей
-GET /users/{id} — данные конкретного пользователя
+GET /users — список пользователей   
+GET /users/{id} — данные конкретного пользователя   
 POST /posts — создание поста (возвращает созданный объект с id)   
 ✅ Задачи   
 1.Создайте структуру проекта:   
@@ -25,10 +25,10 @@ autotest_project/
 └── requirements.txt
 ```
 2.Напишите API-клиент (api/client.py):   
-Класс APIClient с методами:
-get_users() → list
-get_user(user_id) → dict
-create_post(title, body, user_id) → dict
+Класс APIClient с методами:   
+get_users() → list   
+get_user(user_id) → dict   
+create_post(title, body, user_id) → dict   
 Используйте библиотеку requests
 Обрабатывайте HTTP-ошибки (минимум через raise_for_status())   
 3.Напишите тесты на PyTest:   
@@ -55,5 +55,22 @@ pytest==8.3.3
 Соблюдайте PEP8
 Используйте понятные имена функций/переменных
 Тесты должны быть независимыми и идемпотентными
-Не используйте time.sleep() — только явные проверки
+Не используйте time.sleep() — только явные проверки   
 
+1.Добавь файлы в коммит   
+```angular2html
+git add .
+```   
+2.Проверь:
+```angular2html
+git status
+```   
+Ты должен увидеть все новые файлы в зелёном цвете.   
+3.Сделай коммит  
+```angular2html
+git commit -m "Добавил файлы проекта и обновил README"
+```   
+4.Отправь изменения в GitHub   
+```angular2html
+git push origin main
+```
