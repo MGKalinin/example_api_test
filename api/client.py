@@ -37,4 +37,6 @@ class APIClient:
         response.raise_for_status()
         return response.json()
 
+example=APIClient()
+print(example.create_post("zagolovok","body","12"))
 
