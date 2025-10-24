@@ -1,25 +1,33 @@
 import pytest
+import requests
 
-# POST /posts с валидными данными
-@pytest.mark.post_vaid
+@pytest.mark.post_valid
 def test_create_post(api_client):
-    post=api_client.create_post("zagolovok","test_body","12")
+    """Тест: создание поста с валидными данными."""
+    post = api_client.create_post("zagolovok", "test_body", 12)
     assert post is not None
-    assert post['title'] == "zagolovok"
-    assert post['body'] == "test_body"
-    assert post['id'] == "12"
+    assert post["title"] == "zagolovok"
+    assert post["body"] == "test_body"
+    assert post["userId"] == 12  # переданный user_id
+    assert "id" in post  # id генерируется сервером, проверяем только наличие
 
-# ответ содержит id, title, body, userId
+
 @pytest.mark.field_valid
 def test_create_post_field_valid(api_client):
-    post=api_client.create_post("zagolovok","test_body","12")
+    """Тест: ответ содержит все обязательные поля."""
+    post = api_client.create_post("zagolovok", "test_body", 12)
     assert post is not None
-    assert post['title'] == "zagolovok"
-    assert post['body'] == "test_body"
-    assert post['id'] == "12"
+    required_fields = {"id", "title", "body", "userId"}
+    assert required_fields.issubset(post.keys())
 
-# статус-код = 201
+
 @pytest.mark.post
-def test_create_post_status(api_client):
-    post=api_client.create_post("zagolovok","body","12")
-    assert post.status == 201
+def test_create_post_returns_201_status(api_client):
+    """Тест: POST /posts возвращает статус 201."""
+    # Так как текущий APIClient не возвращает статус,
+    # выполним запрос напрямую для проверки статуса
+    response = requests.post(
+        "https://jsonplaceholder.typicode.com/posts",
+        json={"title": "temp", "body": "temp", "userId": 1}
+    )
+    assert response.status_code == 201
