@@ -17,7 +17,7 @@ class APIClient:
 
     def get_user(self,user_id):
         """Метод возвращает данные конкретного пользователя"""
-        url = f"{self.BASE_URL}/users{user_id}"
+        url = f"{self.BASE_URL}/users/{user_id}"
         response = requests.get(url)
         if response.status_code == 404:
             print(f"Пользователь с id={user_id} не найден.")
